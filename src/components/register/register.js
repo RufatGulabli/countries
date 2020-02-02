@@ -104,25 +104,30 @@ class Register extends Component {
   onSubmit = e => {
     e.preventDefault();
     const { form } = this.state;
-    const data = {
-      email: form.email.value,
-      password: form.password.value,
-      firstname: form.firstname.value,
-      lastname: form.lastname.value,
-      birthdate: form.birthdate.value,
-      gender: form.gender.value
-    };
-    this.props.register(data, this.props.history);
+    const isFormValid = checkIfFormIsValid(form);
+    if (isFormValid) {
+      const data = {
+        email: form.email.value,
+        password: form.password.value,
+        firstname: form.firstname.value,
+        lastname: form.lastname.value,
+        birthdate: form.birthdate.value,
+        gender: form.gender.value
+      };
+      this.props.register(data, this.props.history);
+    } else {
+      this.setState({ errorMessage: "Form is invalid." });
+    }
   };
 
   render() {
     const inputArray = [];
 
     let stateErrorMsg = null;
-    if (this.props.error) {
+    if (this.props.error || this.state.errorMessage) {
       stateErrorMsg = (
         <p className="form-signin w-100 mt-1 font-weight-bold text-center text-danger bg-warning">
-          {this.props.error}
+          {this.props.error || this.state.errorMessage}
         </p>
       );
     }
