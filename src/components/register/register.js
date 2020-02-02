@@ -150,23 +150,23 @@ class Register extends Component {
     const inputs = inputArray.map(inp => {
       let errorMsg = null;
       if (inp.touched && !inp.isValid) {
-        errorMsg = <small style={{ color: "indianred" }}>{inp.errorMsg}</small>;
+        errorMsg = (
+          <small key={inp.id} style={{ color: "indianred" }}>
+            {inp.errorMsg}
+          </small>
+        );
       }
 
       if (inp.type === "select") {
         return (
-          <div>
+          <div key="select">
             <select
               className="form-control mb-2"
               onChange={event => this.onChangeHandler(event, inp.id)}
             >
-              <option key="1" value=""></option>
-              <option key="2" value="Male">
-                Male
-              </option>
-              <option key="3" value="Female">
-                Female
-              </option>
+              <option value=""></option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
             </select>
             {errorMsg}
           </div>
@@ -174,9 +174,8 @@ class Register extends Component {
       }
 
       return (
-        <div>
+        <div key={inp.id}>
           <input
-            key={inp.id}
             type={inp.type}
             placeholder={inp.placeholder}
             required

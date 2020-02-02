@@ -4,7 +4,9 @@ import CountryItem from "../countryItem/countryItem";
 
 const CountryList = ({ countries, tempSign }) => {
   const data = countries.map(country => {
-    return <CountryItem data={country} tempSign={tempSign} />;
+    return (
+      <CountryItem key={country.name} data={country} tempSign={tempSign} />
+    );
   });
   return !data.length ? <p>No any countries. Please add some...</p> : data;
 };

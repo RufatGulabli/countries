@@ -87,9 +87,8 @@ class Login extends Component {
       }
 
       return (
-        <div>
+        <div key={inp.id}>
           <input
-            key={inp.id}
             type={inp.type}
             placeholder={inp.placeholder}
             required
